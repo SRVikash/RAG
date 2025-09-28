@@ -1,0 +1,13 @@
+langchain
+langchain-community
+openai
+psycopg2-binary
+sqlalchemy
+pgvector
+python-dotenv
+tiktoken
+pandas
+fastapi
+uvicorn
+PyPDF2
+python-multipart

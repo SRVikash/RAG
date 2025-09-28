@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  postgres:
+    # pgvector-ready Postgres (built from Postgres official + pgvector extension)
+    image: ankane/pgvector:latest
+    container_name: pgvector-local
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "${DB_NAME}"
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data
+      - ./init-sql:/docker-entrypoint-initdb.d:ro  # optional init scripts
+    healthcheck:
+      test: pg_isready -U ${DB_USER} -d ${DB_NAME}
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgvector_data:

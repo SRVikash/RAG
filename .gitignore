@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+.eggs/
+*.log
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# Environment / secrets
+.env
+*.key
+*.pem
+
+# PyCharm / VSCode
+.idea/
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+*.sock
+.docker/
+docker-compose.override.yml
+
+# Coverage / test
+htmlcov/
+.coverage
+.pytest_cache/
+
+# Data / cache
+*.sqlite3
+*.db
+*.dump
+.cache/
+logs/
+tmp/
