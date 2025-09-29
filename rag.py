@@ -138,15 +138,7 @@ def generate_answer_from_chunks(question: str, chunks: List[dict]) -> str:
         context_parts.append(f"Source {c.get('source','unknown')} (id={c.get('id')}):\n{c.get('chunk_text')}\n")
     context = "\n\n".join(context_parts)
 
-    prompt = (
-        "You are a helpful assistant. Use ONLY the information in the context to answer. "
-        "Do not add outside knowledge. "
-        "If the answer cannot be found in the context, reply exactly: 'I don't know based on the context.'\n\n"
-        f"Context:\n{context}\n\n"
-        f"Question:\n{question}\n\n"
-        "Answer:"
-    )
-
+    prompt = ( "You are a helpful assistant. Use ONLY the context below to answer the question. " "If the context doesn't contain the answer, say you don't know.\n\n" f"CONTEXT:\n{context}\n\nQUESTION:\n{question}\n\nAnswer concisely." )
 
 
     # Use an LLM to generate final answer. Replace model name if needed.
@@ -154,7 +146,7 @@ def generate_answer_from_chunks(question: str, chunks: List[dict]) -> str:
         model="gpt-4o-mini",  # change to a model you have access to, e.g., "gpt-4o-mini"
         messages=[{"role":"user", "content": prompt}],
         max_tokens=512,
-        temperature=0.7,
+        temperature=0.0,
     )
     # The exact response structure may vary by client version; common pattern:
     answer = chat_resp.choices[0].message.content
